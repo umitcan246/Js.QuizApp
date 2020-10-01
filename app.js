@@ -76,15 +76,26 @@ function loadQuestion() {
 
 			guess("btn" + i, choices[i]);
 		}
+		showProgress();
 	}
 }
 function guess(id, guess) {
 	var btn = document.getElementById(id);
-	console.log(id);
+
 	btn.onclick = function () {
 		quiz.guess(guess);
 		loadQuestion();
 	};
 }
 
-function showScore() {}
+function showScore() {
+	var html = `<h2>Score </h2> <h4>${quiz.score}</h4>`;
+	document.querySelector(".card-body").innerHTML = html;
+}
+
+function showProgress() {
+	var totalQuestion = quiz.questions.length;
+	var questionNumber = quiz.questionIndex + 1;
+	document.querySelector("#progress").innerHTML =
+		"Question " + questionNumber + " of " + totalQuestion;
+}
